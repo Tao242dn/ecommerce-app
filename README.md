@@ -5,6 +5,7 @@ This is the backend for an e-commerce application built with Node.js, Express, a
 ## Prerequisites
 
 Node.js (v18 or later) and npm (v10 or later) installed on your machine.
+
 MongoDB installed and running on your machine or you can use a MongoDB.
 
 ## Installation
