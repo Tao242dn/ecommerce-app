@@ -4,6 +4,7 @@ import helmet from "helmet";
 import compression from "compression";
 import instanceDb from "./dbs/init.db.js";
 import { checkOverload } from "./helpers/check.connect.js";
+import router from "./routes/index.js";
 
 const app = express();
 
@@ -17,11 +18,7 @@ await instanceDb.connect();
 // checkOverload();
 
 // Init routes
-app.get("/", (req, res, next) => {
-  return res.status(200).json({
-    message: `Hello World Ho He He`,
-  });
-});
+app.use(router);
 
 // Handle errors
 
