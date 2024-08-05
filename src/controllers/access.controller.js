@@ -1,10 +1,14 @@
 "use strict";
 
 import AccessService from "../services/access.service.js";
+import { Ok, Created } from "../core/success.response.js";
 
 class AccessController {
-  signUp = async (req, res, next) => {
-    return res.status(201).json(await AccessService.signup(req.body));
+  signUp = async (req, res) => {
+    new Created({
+      message: 'Registered successfully',
+      metadata: await AccessService.signup(req.body)
+    }).send(res)
   };
 }
 
