@@ -18,7 +18,7 @@ const apiKeySchema = new Schema(
       default: true,
     },
 
-    permission: {
+    permissions: {
       type: [String],
       required: true,
       default: ["0000", "1111", "2222"],

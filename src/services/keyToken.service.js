@@ -1,11 +1,11 @@
 "use strict";
 
-import keytokenModel from "../models/keytoken.model.js";
+import keyTokenModel from "../models/keytoken.model.js";
 
 class KeyTokenService {
   static createKeyToken = async ({ userId, publicKey, privateKey }) => {
     try {
-      const tokens = await keytokenModel.create({
+      const tokens = await keyTokenModel.create({
         user: userId,
         publicKey,
         privateKey,

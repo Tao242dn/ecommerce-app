@@ -42,11 +42,10 @@ class Database {
         await this.#connection.disconnect();
         this.#connection = null; // Reset the connection object
         console.log(`Disconnected from MongoDB.`);
-      } else {
-        console.log(`No active MongoDB connection to disconnect.`);
       }
     } catch (err) {
       console.error(`Error disconnecting from MongoDB: ${err}`);
+      process.exit(1);
     }
   }
 
