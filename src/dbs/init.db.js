@@ -7,7 +7,7 @@ const {
   db: { username, password, cluster },
 } = configDb;
 
-const connectString = `mongodb+srv://${username}:${password}@${cluster}.kipqpva.mongodb.net/`;
+const connectString = `mongodb+srv://${username}:${password}@${cluster}.kipqpva.mongodb.net/shopDEV`;
 
 class Database {
   #connection;
