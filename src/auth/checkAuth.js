@@ -37,7 +37,6 @@ export const checkPermission = (permission) => {
       });
     }
 
-    console.log("permission::", req.objKey.permissions);
     const validPermission = req.objKey.permissions.includes(permission);
 
     if (!validPermission) {
@@ -49,3 +48,9 @@ export const checkPermission = (permission) => {
     return next();
   };
 };
+
+// export const asyncHandler = (fn) => {
+//   return (req, res, next) => {
+//     fn(req, res, next).catch(next);
+//   };
+// };

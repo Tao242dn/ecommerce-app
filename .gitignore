@@ -1,3 +1,4 @@
 node_modules/
 .env
 docs/
+src/rest-client/
