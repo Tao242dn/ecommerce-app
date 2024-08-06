@@ -37,9 +37,7 @@ class KeyTokenService {
   };
 
   static removeKeyById = async (keyId) => {
-    const filter = { _id: keyId };
-    const options = {};
-    return await keyTokenModel.deleteOne(filter, options);
+    return await keyTokenModel.deleteOne({ _id: keyId });
   };
 }
 
