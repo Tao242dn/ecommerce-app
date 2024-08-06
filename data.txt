@@ -1,0 +1,19 @@
+{
+  "_id": {
+    "$oid": "66b1d81e3610db8b89afcdb4"
+  },
+  "user": {
+    "$oid": "66b1d8105782e87faa30afe2"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-08-06T08:00:30.450Z"
+  },
+  "privateKey": "60c0bf4ab4ce19586717f9d49e189455449976977c16ab0a2480c6edb6a86b5a7d67bee57975548bc3b5f1ec1fd53af962f6bfe33b63e760cac615056a4bd215",
+  "publicKey": "23b1f4bea9129fb65127790a17295536241c16047be7232dca9b42cb6ca27d9d7c8ea0cf5d596318c0d5fa4ce27d050a993a98c4de264b411d8b087ffde249c2",
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmIxZDgxMDU3ODJlODdmYWEzMGFmZTIiLCJlbWFpbCI6InNob3BBQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzIyOTMxMzk5LCJleHAiOjE3MjM1MzYxOTl9.WxF4hoRth3Fgcqb_5LOQiqHpSZ14bkVU9dDwwwFzDYI",
+  "refreshTokensUsed": [],
+  "updatedAt": {
+    "$date": "2024-08-06T08:03:19.932Z"
+  }
+}
