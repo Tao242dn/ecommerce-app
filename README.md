@@ -13,7 +13,10 @@ MongoDB installed and running on your machine or you can use a MongoDB.
    ```bash
    git clone https://github.com/Tao242dn/ecommerce-app.git
    ```
-3. Navigate to the project directory: cd ecommerce-app
+3. Navigate to the project directory:
+   ```bash 
+   cd ecommerce-app
+   ```
 4. Install dependencies: npm install
 5. Change a `.env-example` filename to `.env` in the root directory of the project and add the following environment variables
 6. Start the server: npm start
