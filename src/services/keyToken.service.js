@@ -10,7 +10,6 @@ class KeyTokenService {
     refreshToken,
   }) => {
     try {
-      
       const filter = { user: userId };
       const update = {
         publicKey,
@@ -38,6 +37,20 @@ class KeyTokenService {
 
   static removeKeyById = async (keyId) => {
     return await keyTokenModel.deleteOne({ _id: keyId });
+  };
+
+  static findByRefreshTokensUsed = async (refreshToken) => {
+    return await keyTokenModel
+      .findOne({ refreshTokensUsed: refreshToken })
+      .lean();
+  };
+
+  static findByRefreshToken = async (refreshToken) => {
+    return await keyTokenModel.findOne({ refreshToken }).lean();
+  };
+
+  static deleteKeyById = async (userId) => {
+    return await keyTokenModel.deleteOne({ user: userId });
   };
 }
 

@@ -24,7 +24,6 @@ export const createTokenPair = (payload, publicKey, privateKey) => {
 };
 
 export const authentication = asyncHandler(async (req, res, next) => {
-  
   // 1. Get x-client-id ()
   const userId = req.headers[HEADER.CLIENT_ID];
   if (!userId) throw new AuthFailureError("Invalid Request");
@@ -36,7 +35,7 @@ export const authentication = asyncHandler(async (req, res, next) => {
   // 3. GET authorization (access token)
   const accessToken = req.headers[HEADER.AUTHORIZATION];
   if (!accessToken) throw new AuthFailureError("Invalid Request");
-  
+
   // 4. Verify user used access token and public key
   try {
     const decodeUser = jwt.verify(accessToken, keyStore.publicKey);
@@ -44,9 +43,13 @@ export const authentication = asyncHandler(async (req, res, next) => {
       throw new AuthFailureError("Invalid UserId");
 
     req.keyStore = keyStore;
-    console.log(`Request keystore: ${req.keyStore._id}`)
+    console.log(`Request keystore: ${req.keyStore._id}`);
     return next();
   } catch (err) {
     throw err;
   }
 });
+
+export const verifyJwt = (token, keySecret) => {
+  return jwt.verify(token, keySecret);
+};
