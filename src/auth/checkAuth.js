@@ -1,21 +1,21 @@
-"use strict";
+'use strict';
 
-import findById from "../services/apikey.service.js";
-import { ForBiddenError } from "../core/error.response.js";
+import findById from '../services/apikey.service.js';
+import { ForBiddenError } from '../core/error.response.js';
 
 const HEADER = {
-  API_KEY: "x-api-key",
-  AUTHORIZATION: "authorization",
+  API_KEY: 'x-api-key',
+  AUTHORIZATION: 'authorization',
 };
 
 export const checkApiKey = async (req, res, next) => {
   try {
     const key = req.headers[HEADER.API_KEY]?.toString();
-    if (!key) throw new ForBiddenError("Forbidden Error");
+    if (!key) throw new ForBiddenError('Forbidden Error');
 
     // check objKey
     const objKey = await findById(key);
-    if (!objKey) throw new ForBiddenError("Forbidden Error");
+    if (!objKey) throw new ForBiddenError('Forbidden Error');
 
     req.objKey = objKey;
     return next();
@@ -24,11 +24,11 @@ export const checkApiKey = async (req, res, next) => {
 
 export const checkPermission = (permission) => {
   return (req, res, next) => {
-    if (!req.objKey.permissions) throw new ForBiddenError("Permission Denied");
+    if (!req.objKey.permissions) throw new ForBiddenError('Permission Denied');
 
     const validPermission = req.objKey.permissions.includes(permission);
 
-    if (!validPermission) throw new ForBiddenError("Permission Denied");
+    if (!validPermission) throw new ForBiddenError('Permission Denied');
 
     return next();
   };

@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-import statusCodes from "../utils/statusCodes.js";
-import reasonPhrases from "../utils/reasonPhrases.js";
+import statusCodes from '../utils/statusCodes.js';
+import reasonPhrases from '../utils/reasonPhrases.js';
 
 class ErrorResponse extends Error {
   constructor(message, status) {
@@ -55,4 +55,10 @@ class ForBiddenError extends ErrorResponse {
   }
 }
 
-export { ConflictRequestError, BadRequestError, AuthFailureError, NotFoundError, ForBiddenError };
+export {
+  ConflictRequestError,
+  BadRequestError,
+  AuthFailureError,
+  NotFoundError,
+  ForBiddenError,
+};

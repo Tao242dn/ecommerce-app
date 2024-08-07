@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const asyncHandler = (fn) => {
   return (req, res, next) => {

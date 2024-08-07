@@ -1,9 +1,9 @@
 'use strict';
 
-import { model, Schema } from "mongoose";
+import { model, Schema } from 'mongoose';
 
-const DOCUMENT_NAME = "Shop";
-const COLLECTION_NAME = "Shops";
+const DOCUMENT_NAME = 'Shop';
+const COLLECTION_NAME = 'Shops';
 
 // Declare the Schema of the Mongo model
 const shopSchema = new Schema(
@@ -24,8 +24,8 @@ const shopSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["active", "inactive"],
-      default: "inactive",
+      enum: ['active', 'inactive'],
+      default: 'inactive',
     },
     verify: {
       type: Schema.Types.Boolean,

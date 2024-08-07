@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-import mongoose from "mongoose";
-import configDb from "../configs/config.mongodb.js";
+import mongoose from 'mongoose';
+import configDb from '../configs/config.mongodb.js';
 
 const {
   db: { username, password, cluster },
@@ -17,10 +17,10 @@ class Database {
 
   // Connect Db
   async connect(type = `mongodb`) {
-    if (process.env.NODE_ENV === "dev") {
+    if (process.env.NODE_ENV === 'dev') {
       // Only enable for debugging in non-production env
-      mongoose.set("debug", true);
-      mongoose.set("debug", { color: true });
+      mongoose.set('debug', true);
+      mongoose.set('debug', { color: true });
     }
 
     try {

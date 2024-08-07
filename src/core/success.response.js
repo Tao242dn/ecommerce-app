@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-import statusCodes from "../utils/statusCodes.js";
-import reasonPhrases from "../utils/reasonPhrases.js";
+import statusCodes from '../utils/statusCodes.js';
+import reasonPhrases from '../utils/reasonPhrases.js';
 
 class SuccessResponse {
   constructor({

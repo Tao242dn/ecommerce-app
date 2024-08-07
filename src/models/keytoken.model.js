@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
-import { model, Schema } from "mongoose";
+import { model, Schema } from 'mongoose';
 
-const DOCUMENT_NAME = "Key";
-const COLLECTION_NAME = "Keys";
+const DOCUMENT_NAME = 'Key';
+const COLLECTION_NAME = 'Keys';
 
 const keyTokenSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: "Shop",
+      ref: 'Shop',
     },
     publicKey: {
       type: String,
@@ -27,7 +27,7 @@ const keyTokenSchema = new Schema(
     refreshToken: {
       type: String,
       required: true,
-    }
+    },
   },
   {
     timestamps: true,

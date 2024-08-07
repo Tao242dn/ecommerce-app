@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-import mongoose from "mongoose";
-import os from "node:os";
-import process from "node:process";
+import mongoose from 'mongoose';
+import os from 'node:os';
+import process from 'node:process';
 
 const _SECONDS = 5000;
 
@@ -14,10 +14,9 @@ export const countConnect = () => {
 
 // Check overload
 export const checkOverload = () => {
-
   const numCores = os.cpus().length;
   const maxConnections = numCores * 5;
-  
+
   setInterval(() => {
     const numConnection = countConnect();
     // Example maximum connections based on the number of cores

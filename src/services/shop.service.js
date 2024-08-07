@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-import shopModel from "../models/shop.model.js";
+import shopModel from '../models/shop.model.js';
 
 const findByEmail = async ({
   email,

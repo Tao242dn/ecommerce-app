@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-import AccessService from "../services/access.service.js";
-import { Created, SuccessResponse } from "../core/success.response.js";
+import AccessService from '../services/access.service.js';
+import { Created, SuccessResponse } from '../core/success.response.js';
 
 class AccessController {
   handleRefreshToken = async (req, res) => {
     new SuccessResponse({
-      message: "Get tokens successfully",
+      message: 'Get tokens successfully',
       metadata: await AccessService.handleRefreshToken({
         refreshToken: req.body.refreshToken,
       }),
@@ -21,14 +21,14 @@ class AccessController {
 
   signUp = async (req, res) => {
     new Created({
-      message: "Registered successfully",
+      message: 'Registered successfully',
       metadata: await AccessService.signup(req.body),
     }).send(res);
   };
 
   logout = async (req, res) => {
     new SuccessResponse({
-      message: "Logout Successfully",
+      message: 'Logout Successfully',
       metadata: await AccessService.logout({ keyStore: req.keyStore }),
     }).send(res);
   };

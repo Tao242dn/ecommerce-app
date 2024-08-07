@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-import apiKeyModel from "../models/apikey.model.js";
-import crypto from "node:crypto";
+import apiKeyModel from '../models/apikey.model.js';
+import crypto from 'node:crypto';
 
 const findById = async (key) => {
   //   const newKey = await apiKeyModel.create({

@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-import keyTokenModel from "../models/keytoken.model.js";
+import keyTokenModel from '../models/keytoken.model.js';
 
 class KeyTokenService {
   static createKeyToken = async ({

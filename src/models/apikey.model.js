@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-import { model, Schema } from "mongoose";
+import { model, Schema } from 'mongoose';
 
-const COLLECTION_NAME = "ApiKeys";
-const DOCUMENT_NAME = "ApiKey";
+const COLLECTION_NAME = 'ApiKeys';
+const DOCUMENT_NAME = 'ApiKey';
 
 const apiKeySchema = new Schema(
   {
@@ -21,7 +21,7 @@ const apiKeySchema = new Schema(
     permissions: {
       type: [String],
       required: true,
-      default: ["0000", "1111", "2222"],
+      default: ['0000', '1111', '2222'],
     },
   },
   {
