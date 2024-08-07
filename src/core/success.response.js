@@ -4,12 +4,7 @@ import statusCodes from '../utils/statusCodes.js';
 import reasonPhrases from '../utils/reasonPhrases.js';
 
 class SuccessResponse {
-  constructor({
-    message,
-    statusCode = statusCodes.OK,
-    reasonStatusCode = reasonPhrases.OK,
-    metadata = {},
-  }) {
+  constructor({ message, statusCode = statusCodes.OK, reasonStatusCode = reasonPhrases.OK, metadata = {} }) {
     this.message = !message ? reasonStatusCode : message;
     this.status = statusCode;
     this.metadata = metadata;
@@ -27,12 +22,7 @@ class Ok extends SuccessResponse {
 }
 
 class Created extends SuccessResponse {
-  constructor({
-    message,
-    statusCode = statusCodes.CREATED,
-    reasonStatusCode = reasonPhrases.CREATED,
-    metadata,
-  }) {
+  constructor({ message, statusCode = statusCodes.CREATED, reasonStatusCode = reasonPhrases.CREATED, metadata }) {
     super({ message, statusCode, reasonStatusCode, metadata });
   }
 }

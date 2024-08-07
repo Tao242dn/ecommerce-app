@@ -6,7 +6,7 @@ This is the backend for an e-commerce application built with Node.js, Express, a
 
 Node.js (v18 or later) and npm (v10 or later) installed on your machine.
 
-MongoDB installed and running on your machine or you can use a MongoDB.
+MongoDB installed and running on your machine or you can use a MongoDB Atlas.
 
 ## Installation
 
@@ -18,6 +18,12 @@ MongoDB installed and running on your machine or you can use a MongoDB.
    ```bash
    cd ecommerce-app
    ```
-3. Install dependencies: npm install
+3. Install dependencies: 
+   ```bash
+   npm install
+   ```
 4. Change a `.env-example` filename to `.env` in the root directory of the project and add the following environment variables
-5. Start the server: npm start
+5. Start the server:
+   ```bash  
+   npm dev
+   ```

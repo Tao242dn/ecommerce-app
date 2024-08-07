@@ -4,13 +4,9 @@ import shopModel from '../models/shop.model.js';
 import keyTokenModel from '../models/keytoken.model.js';
 import bcrypt from 'bcrypt';
 import KeyTokenService from './keyToken.service.js';
-import { createTokenPair, verifyJwt } from '../auth/authUtils.js';
+import { createTokenPair } from '../auth/authUtils.js';
 import { getInfoData } from '../utils/index.js';
-import {
-  AuthFailureError,
-  BadRequestError,
-  ForBiddenError,
-} from '../core/error.response.js';
+import { AuthFailureError, BadRequestError, ForBiddenError } from '../core/error.response.js';
 import findByEmail from './shop.service.js';
 import createKeyPair from '../utils/createKeyPair.js';
 
@@ -23,44 +19,22 @@ const RoleShop = {
 
 class AccessService {
   // Check refresh token already used
-  static handleRefreshToken = async ({ refreshToken }) => {
-    const foundToken =
-      await KeyTokenService.findByRefreshTokensUsed(refreshToken);
-    if (foundToken) {
-      // Decode who are you
-      const { userId, email, password } = verifyJwt(
-        refreshToken,
-        foundToken.privateKey
-      );
-      console.log({ userId, email, password });
-      // Delete all token in keystore
+  static handleRefreshToken = async ({ refreshToken, user, keyStore }) => {
+    const { userId, email, password } = user;
+
+    if (keyStore.refreshTokensUsed.includes(refreshToken)) {
       await KeyTokenService.deleteKeyById(userId);
       throw new ForBiddenError('Something wrong happened please try again');
     }
 
-    // No it awesome
-    const holderToken = await KeyTokenService.findByRefreshToken(refreshToken);
-    if (!holderToken) throw new AuthFailureError('Shop not registered');
+    if (keyStore.refreshToken !== refreshToken)
+      throw new AuthFailureError('Please try again login');
 
-    // If find verify token
-    const { userId, email, password } = verifyJwt(
-      refreshToken,
-      holderToken.privateKey
-    );
-    console.log('Info---', { userId, email, password });
-
-    // Check UserId
     const foundShop = await findByEmail({ email });
-    if (!foundShop) throw new AuthFailureError('Shop not registered');
+    if (!foundShop) throw new AuthFailureError('Please try again registered');
 
-    // Create new one pair token
-    const tokens = createTokenPair(
-      { userId, email, password },
-      holderToken.publicKey,
-      holderToken.privateKey
-    );
+    const tokens = createTokenPair({ userId, email, password }, keyStore.publicKey, keyStore.privateKey);
 
-    // Update refresh token and refresh token used
     await keyTokenModel.findOneAndUpdate(
       { user: foundShop._id },
       {
@@ -70,7 +44,10 @@ class AccessService {
     );
 
     return {
-      user: { userId, email, password },
+      shop: getInfoData({
+        fields: ['_id', 'name', 'email'],
+        object: newShop,
+      }),
       tokens,
     };
   };
@@ -96,11 +73,7 @@ class AccessService {
     const { _id: userId } = foundShop;
 
     // 4. generate token
-    const tokens = createTokenPair(
-      { userId, email, password },
-      publicKey,
-      privateKey
-    );
+    const tokens = createTokenPair({ userId, email, password }, publicKey, privateKey);
 
     // 5. Save toke in db
     await KeyTokenService.createKeyToken({

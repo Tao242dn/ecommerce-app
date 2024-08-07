@@ -8,7 +8,9 @@ class AccessController {
     new SuccessResponse({
       message: 'Get tokens successfully',
       metadata: await AccessService.handleRefreshToken({
-        refreshToken: req.body.refreshToken,
+        refreshToken: req.refreshToken,
+        user: req.user,
+        keyStore: req.keyStore
       }),
     }).send(res);
   };

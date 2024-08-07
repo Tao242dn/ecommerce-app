@@ -11,54 +11,33 @@ class ErrorResponse extends Error {
 }
 
 class ConflictRequestError extends ErrorResponse {
-  constructor(
-    message = reasonPhrases.CONFLICT,
-    statusCode = statusCodes.CONFLICT
-  ) {
+  constructor(message = reasonPhrases.CONFLICT, statusCode = statusCodes.CONFLICT) {
     super(message, statusCode);
   }
 }
 
 class BadRequestError extends ErrorResponse {
-  constructor(
-    message = reasonPhrases.BAD_REQUEST,
-    statusCode = statusCodes.BAD_REQUEST
-  ) {
+  constructor(message = reasonPhrases.BAD_REQUEST, statusCode = statusCodes.BAD_REQUEST) {
     super(message, statusCode);
   }
 }
 
 class AuthFailureError extends ErrorResponse {
-  constructor(
-    message = reasonPhrases.UNAUTHORIZED,
-    statusCode = statusCodes.UNAUTHORIZED
-  ) {
+  constructor(message = reasonPhrases.UNAUTHORIZED, statusCode = statusCodes.UNAUTHORIZED) {
     super(message, statusCode);
   }
 }
 
 class NotFoundError extends ErrorResponse {
-  constructor(
-    message = reasonPhrases.NOT_FOUND,
-    statusCode = statusCodes.NOT_FOUND
-  ) {
+  constructor(message = reasonPhrases.NOT_FOUND, statusCode = statusCodes.NOT_FOUND) {
     super(message, statusCode);
   }
 }
 
 class ForBiddenError extends ErrorResponse {
-  constructor(
-    message = reasonPhrases.FORBIDDEN,
-    statusCode = statusCodes.FORBIDDEN
-  ) {
+  constructor(message = reasonPhrases.FORBIDDEN, statusCode = statusCodes.FORBIDDEN) {
     super(message, statusCode);
   }
 }
 
-export {
-  ConflictRequestError,
-  BadRequestError,
-  AuthFailureError,
-  NotFoundError,
-  ForBiddenError,
-};
+export { ConflictRequestError, BadRequestError, AuthFailureError, NotFoundError, ForBiddenError };
