@@ -27,13 +27,13 @@ export const createTokenPair = (payload, publicKey, privateKey) => {
 export const authentication = asyncHandler(async (req, res, next) => {
   // 1. Get x-client-id from header
   const userId = req.headers[HEADER.CLIENT_ID];
-  if (!userId) throw new AuthFailureError('Invalid Request');
+  if (!userId) throw new AuthFailureError('Do not get client id');
 
   // 2. Get key store in db based on userId
   const keyStore = await KeyTokenService.findByUserId(userId);
   if (!keyStore) throw new NotFoundError('Not found keystore');
 
-  // 3. Authentication when refresh token used create new token pair (access token and refresh token)
+  // 3. Authentication when refresh token be used create new token pair (access token and refresh token)
   if (req.headers[HEADER.REFRESH_TOKEN]) {
     try {
       const refreshToken = req.headers[HEADER.REFRESH_TOKEN];

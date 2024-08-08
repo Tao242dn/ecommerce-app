@@ -27,11 +27,10 @@ class AccessService {
       throw new ForBiddenError('Something wrong happened please try again');
     }
 
-    if (keyStore.refreshToken !== refreshToken)
-      throw new AuthFailureError('Please try again login');
+    if (keyStore.refreshToken !== refreshToken) throw new AuthFailureError('Please try login again');
 
     const foundShop = await findByEmail({ email });
-    if (!foundShop) throw new AuthFailureError('Please try again registered');
+    if (!foundShop) throw new AuthFailureError('Please try registered again');
 
     const tokens = createTokenPair({ userId, email, password }, keyStore.publicKey, keyStore.privateKey);
 
@@ -46,7 +45,7 @@ class AccessService {
     return {
       shop: getInfoData({
         fields: ['_id', 'name', 'email'],
-        object: newShop,
+        object: foundShop,
       }),
       tokens,
     };
@@ -107,7 +106,7 @@ class AccessService {
       password: passwordHash,
       roles: [RoleShop.SHOP],
     });
-
+    
     // created private key, (send user sign token) public key (save in system verify token)
     // const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
     //   modulusLength: 4096,

@@ -10,8 +10,7 @@ const findById = async (key) => {
   //   });
 
   //   console.log(newKey);
-  const objKey = await apiKeyModel.findOne({ key, status: true }).lean();
-  return objKey;
+  return await apiKeyModel.findOne({ key, status: true }).lean();
 };
 
 export default findById;

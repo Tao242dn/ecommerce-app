@@ -1,4 +1,4 @@
-import express, { urlencoded } from 'express';
+import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import compression from 'compression';
@@ -24,7 +24,7 @@ app.use(router);
 
 // Handle errors
 app.use((req, res, next) => {
-  const error = new Error('Not Found');
+  const error = new Error('Server Not Found');
   error.status = 404;
   next(error);
 });
