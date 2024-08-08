@@ -9,7 +9,7 @@ const HEADER = {
   API_KEY: 'x-api-key',
   CLIENT_ID: 'x-client-id',
   AUTHORIZATION: 'authorization',
-  REFRESH_TOKEN: 'x-rtoken-id',
+  REFRESH_TOKEN: 'x-token-id',
 };
 
 export const createTokenPair = (payload, publicKey, privateKey) => {

@@ -63,7 +63,7 @@ const clothingSchema = new Schema(
     product_shop: {
       type: Schema.Types.ObjectId,
       ref: 'Shop',
-    }
+    },
   },
   {
     collection: 'Clothes',
@@ -83,7 +83,7 @@ const electronicSchema = new Schema(
     product_shop: {
       type: Schema.Types.ObjectId,
       ref: 'Shop',
-    }
+    },
   },
   {
     collection: 'Electronics',
@@ -100,15 +100,20 @@ const furnitureSchema = new Schema(
     },
     size: String,
     material: String,
+    product_shop: {
+      type: Schema.Types.ObjectId,
+      ref: 'Shop',
+    },
   },
   {
-    collection: 'furnitures',
+    collection: 'Furnitures',
     timestamps: true,
   }
 );
 
 export default {
-    productModel: model(DOCUMENT_NAME, productSchema),
-    electronicModel: model('Electronic', electronicSchema),
-    clothingModel: model('Clothing', clothingSchema),
-}
+  productModel: model(DOCUMENT_NAME, productSchema),
+  electronicModel: model('Electronic', electronicSchema),
+  clothingModel: model('Clothing', clothingSchema),
+  furnitureModel: model('Furniture', furnitureSchema),
+};

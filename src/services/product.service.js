@@ -9,16 +9,31 @@ class ProductFactory {
    * type - 'Electronic', 'Clothing'
    * payload
    */
+  
+  // * Implement don't use Design Pattern (Strategies Pattern) */
+  // static async createProduct(type, payload) {
+  //   switch (type) {
+  //     case 'Electronic':
+  //       return new Electronic(payload).createProduct();
+  //     case 'Clothing':
+  //       return new Clothing(payload).createProduct();
+  //     default:
+  //       throw new BadRequestError(`Invalid product type: ${type}`);
+  //   }
+  // }
+  
+  // Use Design Pattern Factory Pattern and Strategies Pattern 
+  static productRegistry = {} // key - class
+
+  static registerProductType(type, classRef) {
+    ProductFactory.productRegistry[type] = classRef
+  }
 
   static async createProduct(type, payload) {
-    switch (type) {
-      case 'Electronic':
-        return new Electronic(payload).createProduct();
-      case 'Clothing':
-        return new Clothing(payload).createProduct();
-      default:
-        throw new BadRequestError(`Invalid product type: ${type}`);
-    }
+    const productClass = ProductFactory.productRegistry[type]
+    if (!productClass) throw new BadRequestError(`Invalid product type: ${type}`);
+
+    return new productClass(payload).createProduct()
   }
 }
 
@@ -57,10 +72,10 @@ class Clothing extends Product {
       ...this.product_attributes,
       product_shop: this.product_shop,
     });
-    if (!newClothing) throw new BadRequestError('Create new clothing failed');
+    if (!newClothing) throw new BadRequestError('Create new clothes failed');
 
     const newProduct = await super.createProduct(newClothing._id);
-    if (!newProduct) throw new BadRequestError('Create new product failed');
+    if (!newProduct) throw new BadRequestError('Create a new product failed');
 
     return newProduct;
   }
@@ -73,13 +88,33 @@ class Electronic extends Product {
       ...this.product_attributes,
       product_shop: this.product_shop,
     });
-    if (!newElectronic) throw new BadRequestError('Create new electronic failed');
+    if (!newElectronic) throw new BadRequestError('Create a new electronic failed');
 
     const newProduct = await super.createProduct(newElectronic._id);
-    if (!newProduct) throw new BadRequestError('Create new product failed');
+    if (!newProduct) throw new BadRequestError('Create a new product failed');
 
     return newProduct;
   }
 }
+
+class Furniture extends Product {
+  async createProduct() {
+    const newFurniture = await modelSchema.furnitureModel.create({
+      ...this.product_attributes,
+      product_shop: this.product_shop,
+    });
+    if (!newFurniture) throw new BadRequestError('Create a new furniture failed');
+
+    const newProduct = await super.createProduct(newFurniture._id);
+    if (!newProduct) throw new BadRequestError('Create a new product failed');
+
+    return newProduct;
+  }
+}
+
+// register product type
+ProductFactory.registerProductType('Clothing', Clothing);
+ProductFactory.registerProductType('Electronic', Electronic);
+ProductFactory.registerProductType('Furniture', Furniture);
 
 export default ProductFactory;

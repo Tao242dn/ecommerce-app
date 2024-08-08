@@ -5,7 +5,6 @@ import { ForBiddenError } from '../core/error.response.js';
 
 const HEADER = {
   API_KEY: 'x-api-key',
-  AUTHORIZATION: 'authorization',
 };
 
 export const checkApiKey = async (req, res, next) => {
