@@ -2,6 +2,13 @@
 
 import { BadRequestError } from '../core/error.response.js';
 import modelSchema from '../models/product.model.js';
+import {
+  findAllDraftsForShop,
+  findAllPublishForShop,
+  publishProductByShop,
+  searchProductByUser,
+  unPublishProductByShop,
+} from '../models/repositories/product.repo.js';
 
 // Define Factory class to create product
 class ProductFactory {
@@ -9,7 +16,7 @@ class ProductFactory {
    * type - 'Electronic', 'Clothing'
    * payload
    */
-  
+
   // * Implement don't use Design Pattern (Strategies Pattern) */
   // static async createProduct(type, payload) {
   //   switch (type) {
@@ -21,19 +28,51 @@ class ProductFactory {
   //       throw new BadRequestError(`Invalid product type: ${type}`);
   //   }
   // }
-  
-  // Use Design Pattern Factory Pattern and Strategies Pattern 
-  static productRegistry = {} // key - class
+
+  // Use Design Pattern Factory Pattern and Strategies Pattern
+  static productRegistry = {}; // key - class
 
   static registerProductType(type, classRef) {
-    ProductFactory.productRegistry[type] = classRef
+    ProductFactory.productRegistry[type] = classRef;
   }
 
   static async createProduct(type, payload) {
-    const productClass = ProductFactory.productRegistry[type]
+    const productClass = ProductFactory.productRegistry[type];
     if (!productClass) throw new BadRequestError(`Invalid product type: ${type}`);
 
-    return new productClass(payload).createProduct()
+    return new productClass(payload).createProduct();
+  }
+
+  // publish product
+  static async publishProductByShop({ product_id, product_shop }) {
+    return await publishProductByShop({ product_id, product_shop });
+  }
+
+  // unpublish product
+  static async unPublishProductByShop({ product_id, product_shop }) {
+    return await unPublishProductByShop({ product_id, product_shop });
+  }
+
+  // query draft
+  static async findAllDraftsForShop({ product_shop, limit = 50, skip = 0 }) {
+    const query = {
+      product_shop,
+      isDraft: true,
+    };
+    return await findAllDraftsForShop({ query, limit, skip });
+  }
+
+  // query publish
+  static async findAllPublishForShop({ product_shop, limit = 50, skip = 0 }) {
+    const query = {
+      product_shop,
+      isPublish: true,
+    };
+    return await findAllPublishForShop({ query, limit, skip });
+  }
+
+  static async searchProduct({ keySearch }) {
+    return await searchProductByUser({ keySearch });
   }
 }
 

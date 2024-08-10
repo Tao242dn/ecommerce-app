@@ -48,7 +48,7 @@ export const authentication = asyncHandler(async (req, res, next) => {
       throw err;
     }
 
-    // Authentication when user logout
+    // Authentication when user get, post, patch, delete method http and logout
   } else {
     const accessToken = req.headers[HEADER.AUTHORIZATION];
     if (!accessToken) throw new AuthFailureError('Do not get access token');
