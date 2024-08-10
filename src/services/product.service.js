@@ -4,7 +4,9 @@ import { BadRequestError } from '../core/error.response.js';
 import modelSchema from '../models/product.model.js';
 import {
   findAllDraftsForShop,
+  findAllProducts,
   findAllPublishForShop,
+  findProduct,
   publishProductByShop,
   searchProductByUser,
   unPublishProductByShop,
@@ -43,6 +45,8 @@ class ProductFactory {
     return new productClass(payload).createProduct();
   }
 
+  static async updateProduct() {}
+
   // publish product
   static async publishProductByShop({ product_id, product_shop }) {
     return await publishProductByShop({ product_id, product_shop });
@@ -71,8 +75,27 @@ class ProductFactory {
     return await findAllPublishForShop({ query, limit, skip });
   }
 
-  static async searchProduct({ keySearch }) {
+  static async searchProducts({ keySearch }) {
     return await searchProductByUser({ keySearch });
+  }
+
+  static async findAllProducts({
+    limit = 50,
+    sort = 'ctime',
+    page = 1,
+    filter = { isPublish: true },
+  }) {
+    return await findAllProducts({
+      limit,
+      sort,
+      page,
+      filter,
+      select: ['product_name', 'product_thumb', 'product_price'],
+    });
+  }
+
+  static async findProduct({ product_id }) {
+    return await findProduct({ product_id, unSelect: ['__v', 'product_variations'] });
   }
 }
 

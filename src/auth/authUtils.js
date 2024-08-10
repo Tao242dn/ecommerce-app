@@ -63,4 +63,3 @@ export const authentication = asyncHandler(async (req, res, next) => {
     }
   }
 });
-

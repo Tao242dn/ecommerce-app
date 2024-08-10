@@ -1,7 +1,7 @@
 'use strict';
 
 import { model, Schema } from 'mongoose';
-import slugify from 'slugify'
+import slugify from 'slugify';
 
 const DOCUMENT_NAME = 'Product';
 const COLLECTION_NAME = 'Products';
@@ -82,8 +82,8 @@ const productSchema = new Schema(
 // create index for search product_name and product_description
 productSchema.index({
   product_name: 'text',
-  product_description: 'text'
-})
+  product_description: 'text',
+});
 
 // Document middleware: runs before .save() and .create()
 productSchema.pre('save', function (next) {

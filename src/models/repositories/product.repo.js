@@ -1,5 +1,6 @@
 import modelSchema from '../product.model.js';
 import { Types } from 'mongoose';
+import { getSelectData, unGetSelectData } from '../../utils/index.js';
 
 export const findAllDraftsForShop = async ({ query, limit, skip }) => {
   return await queryProduct({ query, limit, skip });
@@ -16,6 +17,27 @@ export const searchProductByUser = async ({ keySearch }) => {
     .sort({ score: { $meta: 'textScore' } })
     .lean();
   return results;
+};
+
+export const findAllProducts = async ({ limit, sort, page, filter, select }) => {
+  const skip = limit * (page - 1);
+  const sortBy = sort === 'ctime' ? { _id: -1 } : { _id: 1 };
+  const products = await modelSchema.productModel
+    .find(filter)
+    .sort(sortBy)
+    .skip(skip)
+    .limit(limit)
+    .select(getSelectData(select))
+    .lean();
+
+  return products;
+};
+
+export const findProduct = async ({ product_id, unSelect }) => {
+  return await modelSchema.productModel
+    .findById(product_id)
+    .select(unGetSelectData(unSelect))
+    .lean();
 };
 
 const queryProduct = async ({ query, limit, skip }) => {

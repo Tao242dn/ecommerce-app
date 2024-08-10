@@ -18,12 +18,12 @@ MongoDB installed and running on your machine or you can use a MongoDB Atlas.
    ```bash
    cd ecommerce-app
    ```
-3. Install dependencies: 
+3. Install dependencies:
    ```bash
    npm install
    ```
 4. Change a `.env-example` filename to `.env` in the root directory of the project and add the following environment variables
 5. Start the server:
-   ```bash  
+   ```bash
    npm run dev
    ```

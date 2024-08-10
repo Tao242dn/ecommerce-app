@@ -7,6 +7,8 @@ const router = express.Router();
 
 // search product
 router.get('/search/:keySearch', asyncHandler(productController.getListSearchProduct));
+router.get('', asyncHandler(productController.findAllProducts));
+router.get('/:product_id', asyncHandler(productController.findProduct));
 
 // authentication
 router.use(authentication);
@@ -15,7 +17,7 @@ router.use(authentication);
 router.post('', asyncHandler(productController.createProduct));
 
 // create publish product
-router.post('/publish/:id', asyncHandler(productController.publishProductByShop))
+router.post('/publish/:id', asyncHandler(productController.publishProductByShop));
 
 // create draft product
 router.post('/unpublish/:id', asyncHandler(productController.unPublishProductByShop));
