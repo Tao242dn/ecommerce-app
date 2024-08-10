@@ -25,5 +25,5 @@ MongoDB installed and running on your machine or you can use a MongoDB Atlas.
 4. Change a `.env-example` filename to `.env` in the root directory of the project and add the following environment variables
 5. Start the server:
    ```bash  
-   npm dev
+   npm run dev
    ```
