@@ -2,6 +2,7 @@
 
 import { BadRequestError } from '../core/error.response.js';
 import modelSchema from '../models/product.model.js';
+import { insertInventory } from '../models/repositories/inventory.repo.js';
 import {
   findAllDraftsForShop,
   findAllProducts,
@@ -130,7 +131,16 @@ class Product {
 
   // create new product
   async createProduct(product_id) {
-    return await modelSchema.productModel.create({ ...this, _id: product_id });
+    const newProduct =  await modelSchema.productModel.create({ ...this, _id: product_id });
+    if (newProduct) {
+      // add product_stock in inventory collection
+      await insertInventory({
+        productId: newProduct._id,
+        shopId: this.product_shop,
+        stock: this.product_quantity,
+      })
+    }
+    return newProduct
   }
 
   async updateProduct(productId, payload) {
