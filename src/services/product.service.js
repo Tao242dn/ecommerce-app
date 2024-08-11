@@ -10,7 +10,9 @@ import {
   publishProductByShop,
   searchProductByUser,
   unPublishProductByShop,
+  updateProductById,
 } from '../models/repositories/product.repo.js';
+import { removeNullObject, updateNestedObjectParser } from '../utils/index.js';
 
 // Define Factory class to create product
 class ProductFactory {
@@ -45,7 +47,12 @@ class ProductFactory {
     return new productClass(payload).createProduct();
   }
 
-  static async updateProduct() {}
+  static async updateProduct(type, productId, payload) {
+    const productClass = ProductFactory.productRegistry[type];
+    if (!productClass) throw new BadRequestError(`Invalid product type: ${type}`);
+
+    return new productClass(payload).updateProduct(productId);
+  }
 
   // publish product
   static async publishProductByShop({ product_id, product_shop }) {
@@ -125,6 +132,10 @@ class Product {
   async createProduct(product_id) {
     return await modelSchema.productModel.create({ ...this, _id: product_id });
   }
+
+  async updateProduct(productId, payload) {
+    return await updateProductById({ productId, payload, model: modelSchema.productModel });
+  }
 }
 
 // Define sub-class for different product types Clothing
@@ -140,6 +151,23 @@ class Clothing extends Product {
     if (!newProduct) throw new BadRequestError('Create a new product failed');
 
     return newProduct;
+  }
+
+  async updateProduct(productId) {
+    // Remove attr has null and undefined
+    const objectParams = removeNullObject(this);
+
+    if (objectParams.product_attributes) {
+      // update chill
+      await updateProductById({
+        productId,
+        payload: updateNestedObjectParser(objectParams.product_attributes),
+        model: modelSchema.clothingModel,
+      });
+    }
+
+    const updateProduct = await super.updateProduct(productId, updateNestedObjectParser(objectParams));
+    return updateProduct;
   }
 }
 

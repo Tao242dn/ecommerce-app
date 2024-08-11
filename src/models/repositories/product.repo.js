@@ -40,6 +40,10 @@ export const findProduct = async ({ product_id, unSelect }) => {
     .lean();
 };
 
+export const updateProductById = async ({ productId, payload, model, isNew = true }) => {
+  return await model.findByIdAndUpdate(productId, payload, { new: isNew });
+};
+
 const queryProduct = async ({ query, limit, skip }) => {
   return await modelSchema.productModel
     .find(query)

@@ -13,6 +13,17 @@ class ProductController {
     }).send(res);
   };
 
+  // update product
+  updateProduct = async (req, res, next) => {
+    new SuccessResponse({
+      message: 'Update product successfully',
+      metadata: await ProductFactory.updateProduct(req.body.product_type, req.params.productId, {
+        ...req.body,
+        product_shop: req.user.userId,
+      }),
+    }).send(res);
+  };
+
   // publish product
   publishProductByShop = async (req, res, next) => {
     new SuccessResponse({
@@ -63,17 +74,17 @@ class ProductController {
   findAllProducts = async (req, res, next) => {
     new SuccessResponse({
       message: 'Get list all products successfully',
-      metadata: await ProductFactory.findAllProducts(req.query)
-    }).send(res)
-  }
+      metadata: await ProductFactory.findAllProducts(req.query),
+    }).send(res);
+  };
 
   // get one product
   findProduct = async (req, res, next) => {
     new SuccessResponse({
       message: 'Get one product successfully',
-      metadata: await ProductFactory.findProduct({ product_id: req.params.product_id })
-    }).send(res)
-  }
+      metadata: await ProductFactory.findProduct({ product_id: req.params.product_id }),
+    }).send(res);
+  };
 }
 
 export default new ProductController();
